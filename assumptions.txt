@@ -1,4 +1,6 @@
 Program Description and Key Assumptions:
+
+	[FIXED: old implementation used doubles, and the description said to use ints]
 	
 	My program allocates the party budget to the most liked items. In order to achieve this,
 	I create a HashMap that contains both food and drink items and sort it in descending order based on
@@ -12,9 +14,9 @@ Program Description and Key Assumptions:
 	
 	My initial implementation sorted solely based on total budget for an item = quantity x cost. However,
 	this gives expensive items requested by few guests the advantage. For example, if only one guest requested
-	Sangria ($15.99), the total budget spent on Sangria would be $15.99 x 1 = $15.99. If six guests then
-	requested Chips ($2.50), the total budget spent on Chips would be $2.50 x 6 = $15. However, since $15.99 >
-	$15.00, the budget would be allocated towards one Sangria and no Chips.
+	Sangria ($16), the total budget spent on Sangria would be $16 x 1 = $16. If five guests then
+	requested Chips ($3), the total budget spent on Chips would be $3 x 5 = $15. However, since $16 >
+	$15, the budget would be allocated towards one Sangria and no Chips.
 	
 	As you can see, the implementation I ended up going with prioritizes quantity over overall budget. A key 
 	assumption is that we have unique keys - I cannot have two types of Chips with different prices. We

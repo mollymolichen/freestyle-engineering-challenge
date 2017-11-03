@@ -16,10 +16,10 @@ public class PartyPlanner {
     ArrayList<Guest> guestList = new ArrayList<Guest>();
     
     // store all food and drink listings    
-    HashMap<String, Double> costs = new HashMap<String,Double>(); 
+    HashMap<String, Integer> costs = new HashMap<String,Integer>(); 
     HashMap<String, Integer> drinkQty = new HashMap<String,Integer>(); 
     HashMap<String, Integer> foodQty = new HashMap<String, Integer>(); 
-    HashMap<String, Double> partyBudget = new HashMap<String, Double>();
+    HashMap<String, Integer> partyBudget = new HashMap<String, Integer>();
     Map<String, Integer> sortedItems;
     
     /**
@@ -48,7 +48,7 @@ public class PartyPlanner {
      * @param value
      * @return
      */
-    public static String getKeyFromValue(HashMap<String, Double> map, Object value) {
+    public static String getKeyFromValue(HashMap<String, Integer> map, Object value) {
         for (String s : map.keySet()) {
           if (map.get(s).equals(value)) {
             return s;
@@ -86,7 +86,7 @@ public class PartyPlanner {
             while (sc.hasNextLine()){                                        
                 String[] drink = sc.nextLine().split(":");
                 if (drink.length == 2){
-                    costs.put(drink[0], Double.parseDouble(drink[1]));
+                    costs.put(drink[0], Integer.parseInt(drink[1]));
                     drinkQty.put(drink[0], 0);                              // qty initialized to 0
                 }   
             }
@@ -96,7 +96,7 @@ public class PartyPlanner {
             while (sc.hasNextLine()){
                 String[] food = sc.nextLine().split(":");
                 if (food.length == 2){
-                    costs.put(food[0], Double.parseDouble(food[1]));
+                    costs.put(food[0], Integer.parseInt(food[1]));
                     foodQty.put(food[0], 0);                                // qty initialized to 0
                 }
             }
@@ -151,17 +151,17 @@ public class PartyPlanner {
      * @param budget
      * @return
      */
-    public void allocateBudget(double budget){
-        if (budget < 0.0){
-            System.out.println("Please enter a value greater than 0.0.");
+    public void allocateBudget(int budget){
+        if (budget < 0){
+            System.out.println("Please enter a value greater than 0.");
         }
         
-        HashMap<String, Double> itemsToBuy = new HashMap<String, Double>();
+        HashMap<String, Integer> itemsToBuy = new HashMap<String, Integer>();
         Iterator<Map.Entry<String, Integer>> it = sortedItems.entrySet().iterator();
-        double cost = 0.0;
+        Integer cost = 0;
         int i;
         
-        while (budget > 0.0 && it.hasNext()){
+        while (budget > 0 && it.hasNext()){
             Map.Entry<String, Integer> entry = it.next();
             int qty = entry.getValue();
             for (i = 0; i < qty; i++){
@@ -171,10 +171,10 @@ public class PartyPlanner {
                 else {
                  cost = costs.get(entry.getKey());      // subtract from budget the cost of ONE more item
                 }
-                if (budget - cost >= 0.0){
+                if (budget - cost >= 0){
                     budget -= cost;
                     if (itemsToBuy.containsKey(entry.getKey())){
-                        double currentCost = itemsToBuy.get(entry.getKey());  
+                        int currentCost = itemsToBuy.get(entry.getKey());  
                         itemsToBuy.put(entry.getKey(), currentCost + costs.get(entry.getKey()));
                     }
                     else {
@@ -204,6 +204,6 @@ public class PartyPlanner {
         PartyPlanner p = new PartyPlanner();
         p.parseFiles(fileDirectory);
         p.sortByQuantity();
-        p.allocateBudget(1000);
+        p.allocateBudget(500);
     }
 }
