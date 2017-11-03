@@ -1,0 +1,37 @@
+Alice
+Pepsi,Coke,Sprite
+Chips,Hotdog
+Bob
+Sprite,Water
+Hotdog
+Bethany
+Diet Coke
+Watermelon
+Mallory
+Root Beer,Cheerwine
+Cake,Chips,Watermelon
+Molly
+Cheerwine
+Lasagna
+Sia
+Diet Coke
+Cake
+Taylor
+Pepsi
+Watermelon,Cake,Chips,Hotdog
+Marissa
+Pepsi,Water,Sprite,Root Beer, Cheerwine
+Chips,Cake,Hotdog,Hamburger,Lasagna
+Bethany
+Cheerwine
+Cake
+Sia
+Pepsi
+Chips,Lasagna,Pizza
+Mollie
+Coke,Water
+Hamburger,Chips
+Avery
+Sangria
+Watermelon,Pizza
+

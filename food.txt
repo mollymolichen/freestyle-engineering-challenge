@@ -1,0 +1,10 @@
+Apples:3.99
+Cake:5
+Chips:2.50
+Hamburger:6
+Hotdog:4
+Kabob:5.99
+Lasagna:10
+Quesadilla:5.25
+Pizza:8.99
+Watermelon:4

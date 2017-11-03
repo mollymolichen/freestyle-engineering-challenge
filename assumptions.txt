@@ -1,0 +1,3 @@
+	// assumption that you won't have two of the same drinks (from different vendors)
+	// assume you're buying all the drinks from the same store, at the same price per brand of drink
+	// basically no duplicate keys

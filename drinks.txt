@@ -1,0 +1,7 @@
+Cheerwine:9.50
+Diet Coke:7
+Pepsi:5
+Root Beer:3
+Sangria:15.99
+Sprite:7
+Water:1.25
