@@ -20,6 +20,7 @@ public class PartyPlanner {
     HashMap<String, Integer> drinkQty = new HashMap<String,Integer>(); 
     HashMap<String, Integer> foodQty = new HashMap<String, Integer>(); 
     HashMap<String, Double> partyBudget = new HashMap<String, Double>();
+    Map<String, Integer> sortedItems;
     
     /**
      * Sorts a Map based on value.
@@ -42,7 +43,7 @@ public class PartyPlanner {
     
     /**
      * Reverse lookup a key from its value
-     * ASSUMPTIONS: unique key:value mapping 
+     * ASSUMPTIONS: unique key:value mapping (read assumptions.txt for more) 
      * @param map
      * @param value
      * @return
@@ -80,7 +81,7 @@ public class PartyPlanner {
                 guestList.add(g);
             }
             
-            // handle drinks.txt - combine these two while loops?
+            // handle drinks.txt 
             sc = new Scanner(files.get(1));
             while (sc.hasNextLine()){                                        
                 String[] drink = sc.nextLine().split(":");
@@ -96,7 +97,7 @@ public class PartyPlanner {
                 String[] food = sc.nextLine().split(":");
                 if (food.length == 2){
                     costs.put(food[0], Double.parseDouble(food[1]));
-                    foodQty.put(food[0], 0);
+                    foodQty.put(food[0], 0);                                // qty initialized to 0
                 }
             }
         }
@@ -106,11 +107,9 @@ public class PartyPlanner {
     }
     
     /**
-     * Method to calculate party budget based on quantity and price of items.
+     * Method to sort items based on popularity (quantity requested).
      */
-    public void sortByQuantity(double budget){
-        HashMap<String, Double> itemsToBuy = new HashMap<String, Double>();
-        
+    public void sortByQuantity(){       
         // update quantities
         for (Guest g : guestList){
             for (String d : g.getDrinks()){
@@ -125,6 +124,7 @@ public class PartyPlanner {
             }
         }
         
+        // combine food and drinks
         HashMap<String, Integer> allItems = new HashMap<String, Integer>();
         allItems.putAll(drinkQty);
         allItems.putAll(foodQty);
@@ -132,7 +132,8 @@ public class PartyPlanner {
         sortByValue(allItems);
         
         List<Map.Entry<String, Integer>> temp = new LinkedList<Map.Entry<String, Integer>>(allItems.entrySet());
-        Map<String, Integer> sortedItems = new LinkedHashMap<String, Integer>();
+        sortedItems = new LinkedHashMap<String, Integer>();
+        // create custom comparator
         Collections.sort(temp, new Comparator<Map.Entry<String, Integer>>(){
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2){
                 return o1.getValue().compareTo(o2.getValue());
@@ -142,8 +143,20 @@ public class PartyPlanner {
         // add to linked hash map in reverse order
         for (int i = temp.size() - 1; i >= 0; i--){
             sortedItems.put(temp.get(i).getKey(), temp.get(i).getValue());
+        }       
+    }
+    
+    /**
+     * Algorithm to distribute the party budget.
+     * @param budget
+     * @return
+     */
+    public void allocateBudget(double budget){
+        if (budget < 0.0){
+            System.out.println("Please enter a value greater than 0.0.");
         }
-
+        
+        HashMap<String, Double> itemsToBuy = new HashMap<String, Double>();
         Iterator<Map.Entry<String, Integer>> it = sortedItems.entrySet().iterator();
         double cost = 0.0;
         int i;
@@ -178,50 +191,6 @@ public class PartyPlanner {
     }
     
     /**
-     * Algorithm to distribute the party budget.
-     * @param budget
-     * @return
-     */
-    public HashMap<String, Double> allocateBudget(Double budget){
-        HashMap<String, Double> itemsToBuy = new HashMap<String, Double>();
-        
-        // calculate costs per item
-        for (String d : drinkQty.keySet()){
-            partyBudget.put(d, drinkQty.get(d) * costs.get(d));
-        }
-        for (String f : foodQty.keySet()){
-            partyBudget.put(f, foodQty.get(f) * costs.get(f));
-        }
-        TreeSet<Double> sortedItems = new TreeSet<Double>(Collections.reverseOrder());
-        sortedItems.addAll(partyBudget.values());
-        
-        // calculate which products to buy based on COST ONLY
-        Iterator<Double> it = sortedItems.iterator();
-        
-        // alternate, or roughly calculate ratios
-        Double cost;
-        Double multiplier = 0.2;
-        // aim to get at least 1 food and 1 drink
-        // simpler to just get some of 2 unique items
-        // find multiplier for first item st there's still enough money for second most item
-        while (budget > 0.0 && it.hasNext()){
-            cost = it.next();
-            if (cost != null && budget - cost >= 0){
-                budget -= cost;
-                itemsToBuy.put(getKeyFromValue(partyBudget, cost), cost);
-            }
-        }
-        
-        // display items to buy
-        System.out.println("Things to buy: ");
-        for (String s : itemsToBuy.keySet()){
-            System.out.println(s + " $" + itemsToBuy.get(s));
-        }
-        
-        return itemsToBuy;
-    }
-    
-    /**
      * Main method.
      * @param args
      */
@@ -234,7 +203,7 @@ public class PartyPlanner {
         
         PartyPlanner p = new PartyPlanner();
         p.parseFiles(fileDirectory);
-        p.sortByQuantity(18.);
-        //p.allocateBudget(18.);
+        p.sortByQuantity();
+        p.allocateBudget(1000);
     }
 }

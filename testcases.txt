@@ -1,0 +1,48 @@
+Budget: -10
+Output:
+Please enter a value greater than 0.0.
+
+Budget: 1
+Output:
+
+Budget: 20.25
+Output:
+Spend $15.0 on Chips
+Spend $5.0 on Cake
+
+Budget: 50.00
+Output:
+Spend $15.0 on Chips
+Spend $25.0 on Cake
+Spend $10.0 on Pepsi
+
+Budget: 200.00
+Output:
+Spend $16.0 on Hotdog
+Spend $3.75 on Water
+Spend $17.98 on Pizza
+Spend $21.0 on Sprite
+Spend $16.0 on Watermelon
+Spend $15.0 on Chips
+Spend $30.0 on Lasagna
+Spend $28.5 on Cheerwine
+Spend $25.0 on Cake
+Spend $20.0 on Pepsi
+Spend $6.0 on Root Beer
+
+Budget: 500.00 (buy everything!)
+Output:
+Spend $16.0 on Hotdog
+Spend $3.75 on Water
+Spend $14.0 on Diet Coke
+Spend $21.0 on Sprite
+Spend $16.0 on Watermelon
+Spend $15.0 on Chips
+Spend $28.5 on Cheerwine
+Spend $25.0 on Cake
+Spend $20.0 on Pepsi
+Spend $15.99 on Sangria
+Spend $17.98 on Pizza
+Spend $12.0 on Hamburger
+Spend $30.0 on Lasagna
+Spend $6.0 on Root Beer
