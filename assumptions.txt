@@ -1,3 +1,21 @@
-	// assumption that you won't have two of the same drinks (from different vendors)
-	// assume you're buying all the drinks from the same store, at the same price per brand of drink
-	// basically no duplicate keys
+Program Description and Key Assumptions:
+	
+	My program allocates the party budget to the most liked items. In order to achieve this,
+	I create a HashMap that contains both food and drink items and sort it in descending order based on
+	the number of guests that indicated they liked these items. Then starting from the most popular item
+	(highest quantity), I subtract one unit of that item from the budget as long as there is budget 
+	remaining. 
+	
+	An improvement to this algorithm would be to assign weights to the most popular items, and only purchase
+	weight% of the item as opposed to 100% of the item. Although in this implementation not every guest will
+	receive the item they requested, it allows for a greater variety of food and drink items at the party.
+	
+	My initial implementation sorted solely based on total budget for an item = quantity x cost. However,
+	this gives expensive items requested by few guests the advantage. For example, if only one guest requested
+	Sangria ($15.99), the total budget spent on Sangria would be $15.99 x 1 = $15.99. If six guests then
+	requested Chips ($2.50), the total budget spent on Chips would be $2.50 x 6 = $15. However, since $15.99 >
+	$15.00, the budget would be allocated towards one Sangria and no Chips.
+	
+	As you can see, the implementation I ended up going with prioritizes quantity over overall budget. A key 
+	assumption is that we have unique keys - I cannot have two types of Chips with different prices. We
+	assume that we are buying one brand of food or drink item each. The way to 
