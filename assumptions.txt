@@ -20,4 +20,5 @@ Program Description and Key Assumptions:
 	
 	As you can see, the implementation I ended up going with prioritizes quantity over overall budget. A key 
 	assumption is that we have unique keys - I cannot have two types of Chips with different prices. We
-	assume that we are buying one brand of food or drink item each. The way to 
+	assume that we are buying one brand of food or drink item each. The way to improve this is to use a data
+	structure that allows multiple keys, or does not use a key:value mapping.
